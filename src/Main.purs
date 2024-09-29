@@ -2,9 +2,9 @@ module Main where
 
 import Prelude
 
+import App (app)
 import Data.String (Pattern(..), Replacement(..), replace)
 import Effect (Effect)
-import Effect.Console (log)
 import Web.Event.EventTarget (addEventListener, eventListener)
 import Web.HTML (window)
 import Web.HTML.Location (href, reload)
@@ -12,11 +12,10 @@ import Web.HTML.Window (location)
 import Web.Socket.Event.EventTypes (onMessage)
 import Web.Socket.WebSocket as WS
 
-
 main :: Effect Unit
 main = do
   reloadHandler
-  log "🍝"
+  app
 
 reloadHandler :: Effect Unit
 reloadHandler = do
@@ -26,6 +25,4 @@ reloadHandler = do
   let reloadPage = const $ window >>= location >>= reload
   messageListener <- eventListener reloadPage 
   addEventListener onMessage messageListener true (WS.toEventTarget ws)
-
-
 
