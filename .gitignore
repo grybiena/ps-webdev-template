@@ -10,3 +10,4 @@
 /.spago
 /.venv
 /.direnv
+/index.js
